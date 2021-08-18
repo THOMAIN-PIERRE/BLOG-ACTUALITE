@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte{% endblock %}
+
+{% block body %}
+
+<div class="container border border-primary mt-4 alert alert-primary">
+<div class="col align-items-center">
+<div class="text-center">
+
+
+{# <h1>{{user.username}}</h1> #}
+{# {% if user is same as(app.user) %} #}
+
+	<div class="container mt-1">
+		<div class="row align-items-center">
+			<div class="col-6 text-center">
+				<img src="{{ app.user.avatar }}" alt="avatar de {{ app.user.username }}" class="avatar mt-2 mb-4">
+				<br>
+				{% if is_granted('ROLE_EDITOR') %}
+				<span class="bg-primary text-light p-3"><i><strong>{{ app.user.Postarticles | length }} articles</strong></i></span>
+				{% endif %}
+				<span class="col-7 bg-primary text-light p-3"><i><strong>{{ app.user.commentaires | length }} commentaires</strong></i></span>
+			</div>
+			<div class="col-5 text-center">
+				<h1 class="bg-primary text-light p-3"><b>{{user.username}}</b></h1>	
+			</div>
+		</div>
+	</div>
+	<div class="mt-5">
+		<a href="{{ path('account_password') }}" class="btn btn-success btn-lg mr-2 mb-2"><i class="fas fa-key"></i> <b>Modifier mon mot de passe</b></a>
+	</div>
+	</div>
+
+	{# <hr style="background-color: black; width: 40%; height: 5px"> #}
+{# {% endif %} #}
+</div>
+</div>
+
+
+
+<div class="container-fluid bg-light mt-5">	
+		{# <h3 id="profil" class="my-5 text-center" style="font-weight: bold; border: 2px solid Black">Mon profil</h1> #}
+		<table class="table table-hover">
+			<thead>
+				<tr class="col {{user.tableColor}} text-light">
+					<th class="text-center align-middle">NOM UTILISATEUR</th>
+					<th class="text-center align-middle">EMAIL</th>
+					<th class="text-center align-middle">AVATAR</th>
+					{# <th class="text-center align-middle">MOT DE PASSE</th> #}
+					{# <th class="text-center align-middle">Date d'inscription</th> #}
+					{# <th class="text-center align-middle">Validation CGU</th> #}
+                    <th class="text-center align-middle">ACTIONS</th>
+				</tr>
+			</thead>
+            <tbody>
+                <tr class="col bg-secondary text-light font-weight-bold">
+                    <td class="text-center align-middle">{{user.username}}</td>
+                    <td class="text-center align-middle">{{user.email}}</td>
+					<th class="text-center align-middle"><img src="{{ app.user.avatar }}" alt="avatar" class="avatar"></th>
+					{# {% if is_granted('ROLE_EDITOR') %}
+					<td class="text-center align-middle">{{user.navColor}}</td>
+					<td class="text-center align-middle">{{user.tableColor}}</td>
+					<td class="text-center align-middle">{{user.bgColor}}</td>
+					<td class="text-center align-middle">{{user.nbArticlePerPage}}</td>
+					<td class="text-center align-middle">{{user.nbCommentPerPage}}</td>
+					{% endif %} #}
+                    {# <td class="text-center align-middle">{{user.password |slice(10,20)|raw}}</td> #}
+					{# <td class="text-center align-middle">{{user.password|slice(0,40)|raw}}</td> #}
+					{# <td class="text-center align-middle">
+					<div class="text-center align-middle"><img src="{{user.avatar}}" alt="avatar" class="avatar-medium mb-3 mt-5" alt="Avatar">
+					</div></td>  #}
+                    {# <td class="text-center align-middle">{{user.date_Inscription|date("d/m/Y")}}</td> #}
+					{# <td class="text-center align-middle">{{user.acceptation_CGU}}</td> #}
+					<td class="text-center align-middle">
+					<a href="{{ path('account_profile') }}" class="btn btn-success mr-2 mb-2 p-3"><i class=" fas fa-edit fa-2x text-center align-middle" aria-hidden="true"></i></a>
+                    <a href="" class="btn btn-danger mr-2 mb-2 p-3"><i class="fas fa-trash fa-2x"></i></a>
+                    
+                    </td>
+                    
+                </tr>
+            </tbody>
+		<table>
+    </div>
+	
+<hr>
+{% endblock %}
+
+
+

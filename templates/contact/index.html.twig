@@ -1,0 +1,52 @@
+{# Gere l'affichage de notre formulaire sur notre site internet #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block javascripts %}
+	<!-- Ajout de l'API Recaptcha dans notre document -->
+    <script src="//www.google.com/recaptcha/api.js?h1={{ app.request.locale }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+
+ <link rel="stylesheet" href="{{ asset('css/contact.css') }}"/>
+
+
+{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('message') %}
+        <div class="bg-success text-light h-50" style="font-size: 2em;" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="container">
+    {# <div class="row"> #}
+    {# <div class="col-md-3">&nbsp;</div> #}
+		<div class="col-sm-9 col-md-7 col-lg-7 m-auto">
+			<div class="alert alert-secondary mt-5 mb-5 " id="imgFormContact">
+                <h1 class="text-center mb-4"><b>NOUS CONTACTER</b></h1>
+                <hr style="border: 1px solid blue;">
+                 {{ form_start(contactForm) }}
+                <div class="row">
+                <div class="col-md-6">
+                 {{ form_row(contactForm.nom) }}
+                 </div>
+                <div class="col-md-6">
+                 {{ form_row(contactForm.prenom) }}
+                 </div>
+                 </div>
+                 {{ form_row(contactForm.email) }}
+                {{ form_row(contactForm.message) }}
+                {# {{ form_row(contactForm.captcha) }} #}
+                {{ form_row(contactForm.envoyer) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

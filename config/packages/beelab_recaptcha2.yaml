@@ -1,0 +1,6 @@
+beelab_recaptcha2:
+    site_key: '%env(APP_RECAPTCHA_SITE_KEY)%'
+    secret: '%env(APP_RECAPTCHA_SECRET)%'
+    # enabled value -> true to be functionnal in Dev mode. If false, captcha test will not be functionnal in Dev mode.
+    enabled: true
+    request_method: curl_post

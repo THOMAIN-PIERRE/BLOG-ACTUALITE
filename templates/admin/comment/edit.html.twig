@@ -1,0 +1,29 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}EDITION D'UN COMMENTAIRE{% endblock %}
+
+{% block body %}
+
+<div class="container col-7 mt-5 mb-4">
+    <h1 class="mb-4 text-center">MODIFIER UN COMMENTAIRE</h1>
+
+    {{form_start(form)}}
+    
+
+    <div class="row-10 bg-light">
+       
+            <div class="card-body alert alert-secondary">
+             {{ form_widget(form) }}
+            {# <button type="submit" class="btn btn-warning mt-3 mb-5 center-block"><a href=""></a><i class="" aria-hidden="true"></i> <b>Enregistrer les modifications</b></a></button> #}
+            <button type="submit" class="btn btn-success mt-3 mb-5 center-block"><a href=""></a><i class="fa fa-check" aria-hidden="true"></i> <b>Valider</b></a></button>
+
+    </div>
+       
+ 
+    
+
+   
+    {{ form_end(form) }}
+
+</div>
+{% endblock %}

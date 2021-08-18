@@ -1,0 +1,114 @@
+
+        <nav class="navbar navbar-expand-lg navbar-dark
+
+         {% if app.user %}
+        {{ app.user.navColor }} 
+         {% else %}
+        bg-primary
+         {% endif %}
+
+        sticky-top" id="navMenuMobile">
+			{# <a class="navbar-brand pull-right-top" href="#"><i class="fa fa-cogs" aria-hidden="true"></i> #}
+            {# <div class="pull-left-top"><i class="fa fa-cog fa-2x" aria-hidden="true"></i></div> #}
+            <a class="navbar-brand" href="{{ path('home') }}"><img src="https://i.pinimg.com/originals/81/df/6f/81df6f996acb7f4db9a1c55c0369a982.png" alt="logo Blog" class="img-fluid" style="width:120px; height=120px;"></a>
+            {# <button style="font-size: 2rem; background-color: white;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="font-size: 2rem; background-color: black;"></span>
+            </button> #}
+
+            <button style="font-size: 2rem" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon float-right"></span>
+    </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+
+                    {# <li class="nav-item">
+                        <a style="color:white; font-size: 1.8rem" class="nav-link ml-3" href="{{path('main')}}">A Propos</a>
+                    </li> #}
+                    <li class="nav-item">
+                        <a style="color:white; font-size: 1.8rem" class="nav-link ml-3" href="{{path('main')}}">Fil d'actualité</a>
+                    </li>
+                    {% if is_granted('ROLE_EDITOR') %}
+                        <a style="color:white; font-size: 1.8rem" class="nav-link ml-3" href="{{path('main_create')}}">Publier</a>
+                    {% endif %}
+                    </li>
+					<li class="nav-item">
+                        <a style="color:white; font-size: 1.8rem" class="nav-link ml-3" href="{{path('contact')}}">Contacter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color:white; font-size: 1.8rem" class="nav-link ml-3" href="{{path('event_index')}}">Evènements</a>
+                    </li>
+					
+
+                </ul>
+                 <ul class="navbar-nav ml-auto">
+                {% if app.user %}
+                    <li class="nav-item dropdown">
+                        <a href="#" id="accountDropdownLink" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: white; font-size: 1.3rem">
+                            <img src="{{app.user.avatar}}" style="max-width:55px; border-radius:50%"> {{app.user.username}} 
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
+                            <a href="{{path('account_index')}}" class="dropdown-item p-3 text-left" style="background-color: #ADD8E6;"><i class="fas fa-user-circle"></i> <b>Mon compte</b></a>
+                            {% if is_granted('ROLE_EDITOR') %}
+                            <a href="{{path('account_publications')}}" class="dropdown-item p-3 text-left" style="background-color: #ffcccb;"><i class="fa fa-th-list" aria-hidden="true"></i> <b>Mes articles</b></a>
+                            {% endif %}
+                            <a href="{{path('account_commentaires')}}" class="dropdown-item p-3 text-left" style="background-color: #ADD8E6;"><i class="fa fa-comment" aria-hidden="true"></i> <b>Mes commentaires</b></a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{path('account_events')}}" class="dropdown-item p-3 text-left" style="background-color: #ffcccb;"><i class="far fa-calendar-alt"></i> <b>Mes évènements</b></a>
+                            {% endif %}
+                             <a href="{{path('customizer')}}" class="dropdown-item p-3 text-left" style="background-color: #ADD8E6;"><i class="fas fa-cog" aria-hidden="true"></i> <b>Mes réglages</b></a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{path('admin_account_login')}}" class="dropdown-item p-3 text-left" style="background-color: #343A40; color: yellow"><i class="fas fa-tools"></i> <b>Administration</b></a>
+                            {% endif %}
+                            {# <div class="dropdown-divider"></div>  #}
+                            <a href="{{path('security_logout')}}" class="dropdown-item p-3 text-left" style="background-color: red; color: white"><i class="fas fa-power-off"></i> <b>Déconnexion</b></a>
+                            
+                        </div>
+                    </li>
+                {% else %}
+                    {# <li class="nav-item">
+                        <a href="{{path('security_registration')}}" class="nav-link" style="color:white; font-size: 1.3rem">Inscription</a>
+                    </li> #}
+                    <li class="nav-item">
+                        <a href="{{path('security_login')}}" class="nav-link" style="color:white; font-size: 1.8rem;"> Connexion</a>
+                    </li>
+                {% endif %}
+                </ul>
+				
+                {# <ul class="navbar-nav ml-auto">
+                {% if not app.user %}
+
+                    <li class="nav-item">
+                        <a href="{{path('security_registration')}}" class="nav-link" style="color:white; font-size: 1.3rem"><i class="fa fa-sign-in" aria-hidden="true"></i> Inscription</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="{{path('security_login')}}" class="nav-link" style="color:white; font-size: 1.3rem"><i class="fa fa-sign-in" aria-hidden="true"></i> Connexion</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{{path('security_logout')}}" class="nav-link" style="color:white; font-size: 1.3rem"><i class="fa fa-power-off" aria-hidden="true"></i> Deconnexion</a>
+                    </li>
+                {% endif %}
+                </ul> #}
+				 
+			{# <a class="btn btn-b btn-lg smooth style="position: absolute; right: 0; top: 0;"> <i class="fa fa-cogs" aria-hidden="true"></i></a> #}
+			{# <a class="navbar-brand pull-right-top" href="#"><i class="fa fa-cogs" aria-hidden="true"></i> #}
+						
+					
+
+	
+    </div>
+        </nav>
+
+        {# {% for label, messages in app.flashes %}
+
+        <div class="container">
+            <div class="alert alert-{{label}}">
+                {% for message in messages %}
+                    <p>{{message | raw}}</p>
+                {% endfor %}
+            </div>
+        </div>
+            
+        {% endfor %} #}

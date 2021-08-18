@@ -1,0 +1,227 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-6">
+            <div class="card bg-primary text-white mb-3 text-center">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">
+                            <i class="fas fa-users fa-3x" style="color:white; text-shadow: 2px 6px 2px black;"></i>
+                        </div>
+                        <div class="col-9">
+                            <h4 class="card-title" style="color:white; text-shadow: 2px 6px 2px black; font-size: 1.8em;"> <b><span class="border-dark rounded-circle p-3 bg-dark">{{ stats.users }}</span> MEMBRES</b></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card text-white bg-info mb-3 text-center">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">
+                            <i class="fas fa-pencil-alt fa-3x" style="color:white; text-shadow: 2px 6px 2px black;"></i>
+                        </div>
+                        <div class="col-9">
+                            <h4 class="card-title" style="color:white; text-shadow: 2px 6px 2px black; font-size: 1.8em;"> <b><span class="border-dark rounded-circle p-3 bg-dark">{{ stats.article }}</span> ARTICLES</b></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card text-white bg-success mb-3 text-center">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">
+                            <i class="fas fa-comments fa-3x" style="color:white; text-shadow: 2px 6px 2px black;"></i>
+                        </div>
+                        <div class="col-9">
+                            <h4 class="card-title" style="color:white; text-shadow: 2px 6px 2px black; font-size: 1.8em;"><b><span class="border-dark rounded-circle p-3 bg-dark">{{ stats.commentRealTotal }}</span> COMMENTAIRES PUBLIES</b></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+     <div class="col-6">
+            <div class="card text-white bg-warning mb-3 text-center">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">
+                            <i class="fas fa-check fa-3x" style="color:white; text-shadow: 2px 6px 2px black;"></i>
+                        </div>
+                        <div class="col-9">
+                            <h4 class="card-title" style="color:white; text-shadow: 2px 6px 2px black; font-size: 1.8em;"><b><span class="border-dark rounded-circle p-3 bg-dark">{{ stats.waitingComment }}</span> COMMENTAIRES EN ATTENTE</b></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 class="bg-dark rounded-pill text-light text-center p-2"><b>NOTES</b></h1>
+        <div class="col">
+            <div class="alert bg-success text-light">
+                <h2 class="alert-heading my-3" style="color:yellow; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-trophy"></i><strong> ARTICLES LES PLUS POPULAIRES</strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">#</th>
+                            <th style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">TITRE</th>
+                            <th class="text-center align-middle" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">AUTEUR</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">AVATAR</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">NOTE / 5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for article in statsTables.bestArticles %}
+                        <tr>
+                            <td class="text-center align-middle"><strong>{{article.id}}</strong></td>
+                            <td class="align-middle"><strong>{{article.title |slice(0,170)|raw}}</strong></td>
+                            <td class="text-center align-middle">{{article.username}}</strong></td>
+                            <td class="text-center align-middle"><strong><img src="{{article.avatar}}" alt="photo de l'auteur" style="max-width:55px; border-radius:50%"></strong></td>
+                            <td class="text-center align-middle">
+                                <span class="badge badge-warning" style="font-size: 1.3em;">
+                                    {{article.note | number_format(1, ",", " ")}}
+                                    
+                                </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        
+        {# <div class="row"> #}
+        <div class="col">
+            <div class="alert bg-danger text-light">
+                <h2 class="alert-heading my-3" style="color:yellow; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-arrow-circle-down"></i><strong> ARTICLES LES MOINS POPULAIRES</strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">#</th>
+                            <th style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">TITRE</th>
+                            <th class="text-center align-middle" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">AUTEUR</th>
+                            <th style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">AVATAR</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">NOTE / 5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for article in statsTables.worstArticles %}
+                        <tr>
+                            <td class="text-center align-middle"><strong>{{article.id}}</strong></td>
+                            <td class="align-middle"><strong>{{article.title |slice(0,150)|raw}}</strong></td>
+                            <td class="text-center align-middle"><strong>{{article.username}}</strong></td>
+                            <td class="text-center align-middle"><strong><img src="{{article.avatar}}" alt="photo de l'auteur" style="max-width:55px; border-radius:50%"></strong></td>
+                            <td class="text-center align-middle">
+                                <span class="badge badge-warning" style="font-size: 1.3em;">
+                                    {{article.note | number_format(1, ",", " ")}}
+                                    
+                                </span>
+                            </td>
+                        </tr>
+                         {% endfor %}
+                   
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h1 class="bg-dark rounded-pill text-light text-center p-2"><b>COMMENTAIRES</b></h1>
+        <div class="col">
+            <div class="alert bg-success text-light">
+                <h2 class="alert-heading my-3" style="color:yellow; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-trophy"></i><strong> ARTICLES LES PLUS COMMENTES</strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">#</th>
+                            <th style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">TITRE</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;"><i class="fas fa-comments fa-2x" style="color:color:yellow; text-shadow: 2px 6px 2px black;"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for article in statsTables.mostCommentedArticles %}
+                        <tr>
+                            <td class="text-center align-middle"><strong>{{article.id}}</strong></td>
+                            <td class="align-middle"><strong>{{article.title |slice(0,170)|raw}}</strong></td>
+                            <td class="text-center align-middle">
+                                <span class="badge badge-warning" style="font-size: 1.3em;">
+                                    {{article.number}}
+                                    
+                                </span>
+                                commentaire(s)
+                            </td>
+                        </tr>
+                         {% endfor %}
+                   
+                    </tbody>
+                </table>
+            </div>
+        
+        <div class="row">
+        <div class="col">
+            <div class="alert bg-danger text-light">
+                <h2 class="alert-heading my-3" style="color:yellow; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-arrow-circle-down"></i><strong> ARTICLES LES MOINS COMMENTES</strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">#</th>
+                            <th style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">TITRE</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;"><i class="fas fa-comments fa-2x" style="color:yellow; text-shadow: 2px 6px 2px black;"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for article in statsTables.lessCommentedArticles %}
+                        <tr>
+                            <td class="text-center align-middle"><strong>{{article.id}}</strong></td>
+                            <td class="align-middle"><strong>{{article.title |slice(0,150)|raw}}</strong></td>
+                            <td class="text-center align-middle">
+                                <span class="badge badge-warning" style="font-size: 1.3em;">
+                                    {{article.number}}
+                                    
+                                </span>
+                                commentaire(s)
+                            </td>
+                        </tr>
+                         {% endfor %}
+                   
+                    </tbody>
+                </table>
+            </div>
+     
+        
+    <h1 class="bg-secondary rounded-pill text-light text-center p-2"><b>LES INSCRITS</b></h1>
+         <div class="row">
+        <div class="col">
+            <div class="alert bg-secondary text-light">
+                <h2 class="alert-heading my-3" style="color:yellow; text-shadow: 2px 6px 2px black; font-size: 2em;"><i class="fas fa-trophy"></i><strong> LES INSCRITS LES PLUS ACTIFS</strong></h2>
+                <table class="table table-hover text-white">
+                    <thead>
+                        <tr>
+                            {# <th class="text-center align-middle" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">RANG</th> #}
+                            <th class="text-center align-middle" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">AVATAR</th>
+                            <th class="text-center align-middle" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;">PSEUDO</th>
+                            <th class="text-center" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;"><i class="fas fa-comments fa-2x" style="color:color:yellow; text-shadow: 2px 6px 2px black;"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for users in statsTables.totalCommentsPerPerson %}
+                        <tr>
+                            {# <td class="text-center align-middle" style="color:yellow; text-shadow: 4px 6px 4px black; font-size: 1.5em;"></th> #}
+                            <td class="text-center align-middle"><strong><img src="{{users.avatar}}" alt="photo de l'auteur" style="max-width:55px; border-radius:50%"></strong></td>
+                            <td class="text-center align-middle"><strong>{{users.username}}</strong></td>
+                            <td class="text-center align-middle">
+                                <span class="badge badge-warning" style="font-size: 1.3em;">
+                                    {{users.num}} 
+                                </span>
+                                commentaire(s) posté(s)
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+{% endblock %}

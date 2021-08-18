@@ -1,0 +1,48 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}CREATION D'UN EVENEMENT{% endblock %}
+
+{% block body %}
+
+<div class="container col-5 mt-5 mb-5">
+    <h1 class="mb-4 text-center"> MODIFIER UN EVENEMENT</h1>
+
+    {{form_start(form)}}
+    
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-dark">
+                
+            {{ form_row(form.name) }}
+
+            {{ form_row(form.subtitle) }}
+
+            {{ form_row(form.date) }}
+
+            {{ form_row(form.place) }}
+
+            {{ form_row(form.picture) }}  
+
+            {{ form_row(form.description) }}  
+
+            {{ form_row(form.content) }} 
+
+            {{ form_row(form.envoyer) }}  
+                
+            {# </div class="alert alert-dark"> #}
+            {# {% if editMode %}
+                <button type="submit" class="btn btn-success mt-3 mb-3" style="font-size: 1.5em;"><i class="fas fa-check"></i>
+                     <b>VALIDER LES MODIFICATIONS</b>
+            {% else %}
+                <button type="submit" class="btn btn-success mt-3 mb-3" style="font-size: 1.5em;"><i class="fas fa-check"></i>
+                    <b>AJOUTER</b>
+                    </button>
+            {% endif %} #}
+            </div>
+        </div>
+    </div>
+    {{form_end(form)}}
+
+    </div>
+
+{% endblock %}

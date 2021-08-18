@@ -1,0 +1,45 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Gestion des commentaires{% endblock %}
+
+{% block body %}
+    <div class="admin-page {{ app.user.adminBgColor }}">
+        <div class="container">
+            <div class="row">
+                <div class="col table-responsive mt-5">
+                    <a href="{{ path('admin_category_create') }}" class="btn btn-primary" style="float: right"><strong>Ajouter</strong></a>
+                    <h2>LISTE DES CATEGORIES D'ARTICLES</h2>
+                    <table class="table table-hover mt-3">
+                        <thead class="{{ app.user.admintableColor }} text-white">
+
+                            <tr>
+                                <th class="text-center align-middle">#</th>
+                                <th class="text-center align-middle">Titre</th>
+                                <th class="text-center align-middle">Description</th>
+                                <th class="text-center align-middle">Couleur</th>
+                                <th class="text-center align-middle">Actions</th>
+                            </tr>
+                        <thead>
+                        {# {% set i = 1 %} #}
+                        {% for category in pagination.data %}
+                                <tr>
+                                    <td class="text-center align-middle">{{category.id}}</td>
+                                    <td class="text-center align-middle"><b>{{category.title}}</b></td>
+                                    <td class="text-center align-middle align-items-center">{{category.description}}</td>
+                                    <td class="text-center align-middle {{category.color}} mt-5">{{category.color}}</td>
+                                    <td class="text-center align-middle">
+                                        <a href="{{ path('admin_category_edit', {'id': category.id}) }}" class="btn btn-success mr-2 mb-2"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                        <a href="{{ path('admin_category_delete', {'id': category.id}) }}"class="btn btn-danger mr-2 mb-2"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            {# {% set i = i+1 %} #}
+                        {% endfor %}
+                    </table>
+                    <hr>
+                     {% include 'admin/template_parts/pagination.html.twig' with {'route' : 'admin_category'} %}
+                </div>
+            </div>
+        </div>
+    </div>
+     <footer class="{{ app.user.bgColor }}" style="height: 1000px;"></footer>
+ {% endblock %}  
